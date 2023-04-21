@@ -1,25 +1,33 @@
 <template>
-  <Navbar :logo="logo" alt="logo"/>
-  <router-view/>
+  <Navbar :logo="logo" alt="logo"  @openModal="togleModal"/>
+  <ModalMenuVue v-if="modal" :logo="logo" @closeModal="togleModal"/>
+  <router-view />
   <footerVue :logo="logo" alt="logo"/>
-
 </template>
 
 <script>
   import Navbar from '@/components/navbar.vue';
   import logoNav from '@/assets/logo-navbar.png'
   import FooterVue from '@/components/footer.vue';
+  import ModalMenuVue from '@/components/modalMenu.vue';
 
   export default {
     name: 'App',
     data() {
       return {
-        logo: logoNav
+        logo: logoNav,
+        modal: true //false*
       }
     },
     components: {
       Navbar,
-      FooterVue
+      FooterVue,
+      ModalMenuVue
+    },
+    methods: {
+      togleModal() {  // abre ou fecha o modal
+        this.modal = !this.modal;
+      }
     }
   }
 

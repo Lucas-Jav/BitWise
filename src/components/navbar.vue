@@ -3,14 +3,14 @@
         <router-link to="/">
             <img :src="logo" :alt="alt" id="logo">
         </router-link>
-        <nav class="desktop">
+        <nav class="desktop"> <!-- section for desktop -->
             <router-link to="/">Home</router-link>
             <router-link to="/login">Login</router-link>
             <router-link to="/">Seila</router-link>
         </nav>
-        <nav class="mobile">
+        <nav class="mobile"> <!-- section for mobile -->
             <label class="burger" for="burger">
-                <input type="buttom" id="burger">
+                <input type="buttom" id="burger" @click="$emit('openModal')">
                 <span></span>
                 <span></span>
                 <span></span>
@@ -26,6 +26,9 @@ export default {
     props: [
         'logo',
         'alt'
+    ],
+    emits: [
+        'openModal'
     ]
 }
 
@@ -38,11 +41,17 @@ export default {
 
     header {
         width: 100%;
-        border-bottom: 1px solid #000;
+        height: 70px;
+        border-bottom: 2px solid #000;
         display: flex;
         justify-content: space-between;
         align-items: center;
         padding: 10px 10%;
+    }
+
+    header a  {
+        display: flex;
+        align-items: center;
     }
 
     header nav.desktop {
@@ -69,7 +78,7 @@ export default {
 
     @media (width <=768px) {
         img {
-            height: 40px;
+            height: 50px;
         }
 
         header nav.desktop {

@@ -64,12 +64,12 @@
     section {
     left: 0;
     bottom: 0px;
-    border-top: 1px solid #000;
+    border-top: 2px solid #000;
     padding-top: 60px;
     }
 
     img.logo {
-        width: 100px;
+        width: 150px;
     }
 
     footer {
