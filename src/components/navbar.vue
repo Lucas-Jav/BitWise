@@ -1,0 +1,128 @@
+<template>
+    <header>
+        <router-link to="/">
+            <img :src="logo" :alt="alt" id="logo">
+        </router-link>
+        <nav class="desktop">
+            <router-link to="/">Home</router-link>
+            <router-link to="/login">login</router-link>
+            <router-link to="/">Seila</router-link>
+        </nav>
+        <nav class="mobile">
+            <label class="burger" for="burger">
+                <input type="buttom" id="burger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </label>
+        </nav>
+    </header>
+</template>
+
+<script>
+
+export default {
+    name: 'Navbar',
+    props: [
+        'logo',
+        'alt'
+    ]
+}
+
+</script>
+
+<style scoped>
+    nav.mobile {
+        display: none;
+    }
+
+    header {
+        width: 100%;
+        border-bottom: 1px solid #000;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 10%;
+    }
+
+    header nav.desktop {
+        display: flex;
+        gap: 10px;
+    }
+
+    header nav.desktop a {
+        cursor: pointer;
+        font-size: 1rem;
+        border-bottom: 1px solid transparent;
+
+    }
+
+    header nav.desktop a:hover {
+        transition: 1s;
+        border-bottom: 1px solid #000;
+    }
+
+    img {
+        height: 60px;
+        cursor: pointer;
+    }
+
+    @media (width <=768px) {
+        img {
+            height: 40px;
+        }
+
+        header nav.desktop {
+            display: none !important;
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        nav.mobile {
+            display: block;
+        }
+
+        .burger {
+            position: relative;
+            width: 30px;
+            height: 20px;
+            background: transparent;
+            cursor: pointer;
+            display: block;
+        }
+
+        .burger input {
+            display: none;
+        }
+
+        .burger span {
+            display: block;
+            position: absolute;
+            height: 2px;
+            width: 100%;
+            background: black;
+            border-radius: 9px;
+            opacity: 1;
+            left: 0;
+        }
+
+        .burger span:nth-of-type(1) {
+            top: 0px;
+            transform-origin: left center;
+        }
+
+        .burger span:nth-of-type(2) {
+            top: 50%;
+            transform: translateY(-50%);
+            transform-origin: left center;
+        }
+
+        .burger span:nth-of-type(3) {
+            top: 100%;
+            transform-origin: left center;
+            transform: translateY(-100%);
+        }
+
+        
+    }
+</style>

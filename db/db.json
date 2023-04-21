@@ -1,0 +1,61 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "name": "lucas Oliveira",
+      "email": "lucasrazebra@gmail.com",
+      "password": "91911025c",
+      "cpf": "45110333408",
+      "logged": false,
+      "birthday": "24/03/2004",
+      "cart": [
+        {
+          "id": 1,
+          "items": 1,
+          "sold": 50,
+          "name": "Mouse",
+          "description": "Mouse bom",
+          "value": 120.00
+        }
+      ],
+      "bought": [
+        {
+          "id": 1,
+          "items": 1,
+          "sold": 30,
+          "name": "Fone",
+          "description": "fone bom",
+          "value": 100.00
+        }
+      ]
+    }
+  ],
+  "seller": [
+    {
+      "id": 1,
+      "name": "Kabum Gamer",
+      "email": "kabum@gamer.com",
+      "password": "kabumgamer",
+      "logged": false,
+      "cnpj": "62.826.378/0001-04",
+      "products": [
+        {
+          "id": 1,
+          "amount": 100,
+          "sold": 50,
+          "name": "Mouse",
+          "description": "Mouse bom",
+          "value": 120.00
+        },
+        {
+          "id": 2,
+          "amount": 60,
+          "sold": 30,
+          "name": "Fone",
+          "description": "fone bom",
+          "value": 100.00
+        }
+      ]
+    }
+  ]
+}
