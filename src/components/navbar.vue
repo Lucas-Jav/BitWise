@@ -5,7 +5,7 @@
         </router-link>
         <nav class="desktop">
             <router-link to="/">Home</router-link>
-            <router-link to="/login">login</router-link>
+            <router-link to="/login">Login</router-link>
             <router-link to="/">Seila</router-link>
         </nav>
         <nav class="mobile">

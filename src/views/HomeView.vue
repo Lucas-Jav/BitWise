@@ -12,3 +12,12 @@ export default {
   name: 'HomeView'
 }
 </script>
+
+
+<style scoped>
+
+  div.home {
+    height: 100vh;
+  }
+
+</style>

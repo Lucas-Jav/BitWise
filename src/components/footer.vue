@@ -62,10 +62,8 @@
 <style scoped>
 
     section {
-    position: fixed;
     left: 0;
     bottom: 0px;
-    width: 100vw;
     border-top: 1px solid #000;
     padding-top: 60px;
     }
