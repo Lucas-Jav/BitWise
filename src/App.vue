@@ -16,7 +16,7 @@
     data() {
       return {
         logo: logoNav,
-        modal: true //false*
+        modal: false // false === fechado OU true === aberto
       }
     },
     components: {

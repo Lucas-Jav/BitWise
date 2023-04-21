@@ -6,7 +6,7 @@
         <nav class="desktop"> <!-- section for desktop -->
             <router-link to="/">Home</router-link>
             <router-link to="/login">Login</router-link>
-            <router-link to="/">Seila</router-link>
+            <router-link to="/register">Register</router-link>
         </nav>
         <nav class="mobile"> <!-- section for mobile -->
             <label class="burger" for="burger">
