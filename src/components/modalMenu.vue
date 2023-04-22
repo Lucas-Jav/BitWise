@@ -43,6 +43,7 @@
         height: 100vh;
         background: #fff;
         top: 0;
+        z-index: 100;
     }
 
     header.modalheader {
