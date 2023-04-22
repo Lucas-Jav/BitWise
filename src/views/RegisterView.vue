@@ -108,45 +108,56 @@
         methods: {
             async registerNewUser(e) {
                 e.preventDefault()
+                let emailEqual;
 
                 await axios.get('http://localhost:3000/users').then((response) => {
                     console.log(response.data)
-                })
-                
-                if (this.password_register === this.password_confirm_register) {
+                    
+                    emailEqual = this.checkEmail(this.email_register, response.data)
 
-                    this.date_to_register = dayjs().format('DD/MM/YYYY'); // data do dia criado
-                    this.cpf = generate({ format: true }); // gera um cpf aleatorio
+                    if (this.password_register === this.password_confirm_register && emailEqual) {
+                        
+                        this.date_to_register = dayjs().format('DD/MM/YYYY'); // data do dia criado
+                        this.cpf = generate({ format: true }); // gera um cpf aleatorio
 
-                    const data = {
-                        name: this.name_register,
-                        logged: this.logged,
-                        email: this.email_register,
-                        password: this.password_register,
-                        birthday: dayjs(this.date_register).format('DD/MM/YYYY'),
-                        account_created: this.date_to_register,
-                        cpf: this.cpf,
-                        cart: this.cart,
-                        bought: this.bought
+                        const data = {
+                            name: this.name_register,
+                            logged: this.logged,
+                            email: this.email_register,
+                            password: this.password_register,
+                            birthday: dayjs(this.date_register).format('DD/MM/YYYY'),
+                            account_created: this.date_to_register,
+                            cpf: this.cpf,
+                            cart: this.cart,
+                            bought: this.bought
+                        }
+
+                        console.log(data)
+
+                        axios({
+                            method: 'Post',
+                            url: 'http://localhost:3000/users',
+                            data: data
+                        }).then((res)=> {
+                            console.log(res);
+                            document.querySelector('form').reset()
+                            this.registrado = !this.registrado
+                        })
+                    } else {
+                        alert('erro')
+                        emailEqual = ''
+                        this.email_register = ''
                     }
 
-                    console.log(data)
-
-                    await axios({
-                        method: 'Post',
-                        url: 'http://localhost:3000/users',
-                        data: data
-                    }).then((res)=> {
-                        console.log(res);
-                        document.querySelector('form').reset()
-                        this.registrado = !this.registrado
-                    })
-
-
-                } else {
-                    alert('senhas n batem')
+                })
+            },
+            checkEmail(email, usuarios) {
+                for (let i = 0; i < usuarios.length; i++) {
+                    if (usuarios[i].email === email) {
+                        return false;
+                    }
                 }
-                
+                return true;
             }
         }
         
