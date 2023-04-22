@@ -1,6 +1,6 @@
 <template>
     <section class="register">
-        <form class="form_container">
+        <form class="form_container" @submit="registerNewUser" v-if="registrado">
             <!-- <div class="logo_container"></div> -->
             <img :src="logo" alt="logo" class="logo_container">
             <div class="title_container">
@@ -10,7 +10,7 @@
             <br>
             <div class="input_container">
                 <label class="input_label" for="email_field">Name</label>
-                <img src="https://img.icons8.com/ios/50/null/name--v1.png" class="icon"/>
+                <img src="https://img.icons8.com/ios/50/null/name--v1.png" class="icon" alt="icon"/>
                 <input placeholder="Write your name" title="Inpit title" name="input-name" type="text" class="input_field"
                     v-model="name_register" pattern="^[A-Za-zÀ-ÖØ-öø-ÿ\s]{8,}$" required>
             </div>
@@ -56,10 +56,11 @@
                 </svg>
                 <input placeholder="Password" title="Inpit title" name="input-name" type="password" class="input_field"
                     v-model="password_confirm_register" pattern="^.{5,}$" required>
+                    
             </div>
             <div class="input_container">
                 <label for="data_field" class="input_label">Date</label>
-                <img src="https://img.icons8.com/ios/50/null/calendar-10.png" class="icon"/>
+                <img src="https://img.icons8.com/ios/50/null/calendar-10.png" class="icon" alt="icon"/>
                 <input type="date" name="input-date" class="input_field" v-model="date_register" required>
             </div>
             <button title="Sign In" type="submit" class="sign-in_btn">
@@ -67,21 +68,88 @@
             </button>
             <p class="note">Terms of use &amp; Conditions</p>
         </form>
+        <div class="form_container" v-else>
+            <img src="https://img.icons8.com/color/96/null/verified-account--v1.png" alt="verifique"/>
+            <h2>Parabéns!</h2>
+            <span>Sua conta foi criada com sucesso. Você já pode fazer login e começar a 
+                explorar todos os recursos disponíveis em nosso site. Agradecemos por se juntar à 
+                nossa comunidade e esperamos que você tenha uma ótima experiência conosco.
+            </span>
+            <router-link to="/login">
+                <strong>Login</strong> 
+            </router-link>
+        </div>
     </section>
 </template>
 
 <script>
     import logoimg from '@/assets/logo-navbar.png'
-
-    
+    const dayjs = require('dayjs')
+    import axios from 'axios'
+    import { generate } from 'gerador-validador-cpf'
 
     export default {
         name: 'RegisterView',
         data() {
             return {
-                logo: logoimg
+                logo: logoimg,
+                registrado: true,
+                name_register: '',
+                email_register: '',
+                password_register: '',
+                date_register: '',
+                date_to_register: '',
+                cpf: '',
+                cart: [],
+                bought: [],
+                logged: false
+            }
+        },
+        methods: {
+            async registerNewUser(e) {
+                e.preventDefault()
+
+                await axios.get('http://localhost:3000/users').then((response) => {
+                    console.log(response.data)
+                })
+                
+                if (this.password_register === this.password_confirm_register) {
+
+                    this.date_to_register = dayjs().format('DD/MM/YYYY'); // data do dia criado
+                    this.cpf = generate({ format: true }); // gera um cpf aleatorio
+
+                    const data = {
+                        name: this.name_register,
+                        logged: this.logged,
+                        email: this.email_register,
+                        password: this.password_register,
+                        birthday: dayjs(this.date_register).format('DD/MM/YYYY'),
+                        account_created: this.date_to_register,
+                        cpf: this.cpf,
+                        cart: this.cart,
+                        bought: this.bought
+                    }
+
+                    console.log(data)
+
+                    await axios({
+                        method: 'Post',
+                        url: 'http://localhost:3000/users',
+                        data: data
+                    }).then((res)=> {
+                        console.log(res);
+                        document.querySelector('form').reset()
+                        this.registrado = !this.registrado
+                    })
+
+
+                } else {
+                    alert('senhas n batem')
+                }
+                
             }
         }
+        
     }
 
 </script>
@@ -95,164 +163,6 @@
         justify-content: center
     }
 
-    .form_container {
-        width: fit-content;
-        height: fit-content;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        gap: 15px;
-        padding: 50px 40px 20px 40px;
-        background-color: #ffffff;
-        box-shadow: 0px 106px 42px rgba(0, 0, 0, 0.01),
-        0px 59px 36px rgba(0, 0, 0, 0.05), 0px 26px 26px rgba(0, 0, 0, 0.09),
-        0px 7px 15px rgba(0, 0, 0, 0.1), 0px 0px 0px rgba(0, 0, 0, 0.1);
-        border-radius: 11px;
-        font-family: "Inter", sans-serif;
-    }
-
-    .logo_container {
-        box-sizing: border-box;
-        height: 60px;
-        background: linear-gradient(180deg, rgba(248, 248, 248, 0) 50%, #F8F8F888 100%);
-        border: 1px solid #F7F7F8;
-        border-radius: 11px;
-    }
-
-    .title_container {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        gap: 10px;
-    }
-
-    .title {
-        margin: 0;
-        font-size: 1.25rem;
-        font-weight: 700;
-        color: #212121;
-    }
-
-    .subtitle {
-        font-size: 0.725rem;
-        max-width: 80%;
-        text-align: center;
-        line-height: 1.1rem;
-        color: #8B8E98
-    }
-
-    .input_container {
-        width: 100%;
-        height: fit-content;
-        position: relative;
-        display: flex;
-        flex-direction: column;
-        gap: 5px;
-    }
-
-    .icon {
-        width: 20px;
-        position: absolute;
-        z-index: 99;
-        left: 12px;
-        bottom: 9px;
-    }
-
-    .input_label {
-        font-size: 0.75rem;
-        color: #8B8E98;
-        font-weight: 600;
-    }
-
-    .input_field {
-        width: auto;
-        height: 40px;
-        padding: 0 0 0 40px;
-        border-radius: 7px;
-        outline: none;
-        border: 1px solid #e5e5e5;
-        filter: drop-shadow(0px 1px 0px #efefef)
-        drop-shadow(0px 1px 0.5px rgba(239, 239, 239, 0.5));
-        transition: all 0.3s cubic-bezier(0.15, 0.83, 0.66, 1);
-    }
-
-    .input_field:focus {
-        border: 1px solid transparent;
-        box-shadow: 0px 0px 0px 2px #242424;
-        background-color: transparent;
-    }
-
-    .sign-in_btn {
-        width: 100%;
-        height: 40px;
-        border: 0;
-        background: #000;
-        border-radius: 7px;
-        outline: none;
-        text-align: center;
-        color: #ffffff;
-        cursor: pointer;
-    }
-
-    .sign-in_ggl {
-        width: 100%;
-        height: 40px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 10px;
-        background: #ffffff;
-        border-radius: 7px;
-        outline: none;
-        color: #242424;
-        border: 1px solid #e5e5e5;
-        filter: drop-shadow(0px 1px 0px #efefef)
-        drop-shadow(0px 1px 0.5px rgba(239, 239, 239, 0.5));
-        cursor: pointer;
-    }
-
-    .sign-in_apl {
-        width: 100%;
-        height: 40px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 10px;
-        background: #212121;
-        border-radius: 7px;
-        outline: none;
-        color: #ffffff;
-        border: 1px solid #e5e5e5;
-        filter: drop-shadow(0px 1px 0px #efefef)
-        drop-shadow(0px 1px 0.5px rgba(239, 239, 239, 0.5));
-        cursor: pointer;
-    }
-
-    .separator {
-        width: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 30px;
-        color: #8B8E98;
-    }
-
-    .separator .line {
-        display: block;
-        width: 100%;
-        height: 1px;
-        border: 0;
-        background-color: #e8e8e8;
-    }
-
-    .note {
-        font-size: 0.75rem;
-        color: #8B8E98;
-        text-decoration: underline;
-    }
-
     input[type="date"] {
         color: #8B8E98;
     }
@@ -261,6 +171,11 @@
         outline: none;
         border: none;
         
+    }
+
+    input[type="date"]:not(:focus) {
+        outline: none !important;
+        border: 1px solid #e5e5e5 !important;
     }
 
     input:required:valid {
@@ -273,4 +188,30 @@
         border: 1px solid #c9001b;
     }
 
+    div.form_container {
+        max-width: 400px;
+    }
+
+    div.form_container h2{
+        font-size: 1.5rem;
+    }
+
+    div.form_container span{
+        font-size: 1rem;
+        text-align: justify;
+        color: #000000d7;
+        font-weight: 500;
+        line-height: 1.5;
+    }
+
+    div.form_container a {
+        padding: 5px;
+        text-align: center;
+        border-radius: 6px;
+        cursor: pointer;
+        width: 100%;
+        border: 1px solid #000;
+        background: #000;
+        color: #fff;
+    }
 </style>
