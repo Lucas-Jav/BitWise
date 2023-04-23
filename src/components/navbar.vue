@@ -3,7 +3,13 @@
         <router-link to="/">
             <img :src="logo" :alt="alt" id="logo">
         </router-link>
-        <nav class="desktop"> <!-- section for desktop -->
+        <nav class="desktop" v-if="$route.params.id">
+            <router-link :to="'/user/' + $route.params.id + '/home'">Home</router-link>
+            <router-link :to="'/user/' + $route.params.id + '/profile'">Profile</router-link>
+            <router-link :to="'/user/' + $route.params.id + '/cart'">Cart</router-link>
+            <router-link :to="'/user/' + $route.params.id + '/exit'">Exit</router-link>
+        </nav>
+        <nav class="desktop" v-else> <!-- section for desktop -->
             <router-link to="/">Home</router-link>
             <router-link to="/login">Login</router-link>
             <router-link to="/register">Register</router-link>
