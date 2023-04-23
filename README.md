@@ -1,4 +1,4 @@
-# eletric_caio
+# BitWise
 
 ## Project setup
 ```
@@ -8,6 +8,11 @@ npm install
 ### Compiles and hot-reloads for development
 ```
 npm run serve
+```
+
+### Json-server execute
+```
+npm run backend
 ```
 
 ### Compiles and minifies for production
