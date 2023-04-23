@@ -196,6 +196,30 @@
       "cart": [],
       "bought": [],
       "id": 15
+    },
+    {
+      "name": "lucas oliveira",
+      "logged": false,
+      "email": "calin7549@uorak.com",
+      "password": "91911025",
+      "birthday": "24/03/2004",
+      "account_created": "23/04/2023",
+      "cpf": "901.541.930-20",
+      "cart": [],
+      "bought": [],
+      "id": 16
+    },
+    {
+      "name": "lucas oliveira",
+      "logged": false,
+      "email": "ijaz123@uorak.com",
+      "password": "91911025",
+      "birthday": "24/03/2004",
+      "account_created": "23/04/2023",
+      "cpf": "276.251.570-08",
+      "cart": [],
+      "bought": [],
+      "id": 17
     }
   ],
   "seller": [

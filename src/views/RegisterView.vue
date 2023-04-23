@@ -1,12 +1,13 @@
 <template>
     <section class="register">
         <form class="form_container" @submit="registerNewUser" v-if="registrado">
-            <!-- <div class="logo_container"></div> -->
             <img :src="logo" alt="logo" class="logo_container">
             <div class="title_container">
-                <p class="title">Login to your Account</p>
-                <span class="subtitle">Get started with our app, just create an account and enjoy the experience.</span>
+                <p class="title">Criar sua conta</p>
+                <span class="subtitle">Comece a usar nossa plataforma, basta criar uma conta e aproveitar a experiência.</span>
             </div>
+            <br>
+            <span v-if="error" class="msgError">{{ msgError }}</span>
             <br>
             <div class="input_container">
                 <label class="input_label" for="email_field">Name</label>
@@ -55,7 +56,7 @@
                     </path>
                 </svg>
                 <input placeholder="Password" title="Inpit title" name="input-name" type="password" class="input_field"
-                    v-model="password_confirm_register" pattern="^.{5,}$" required>
+                    v-model="password_confirm_register" @keyup="passwordConfirm" pattern="^.{5,}$" required>
                     
             </div>
             <div class="input_container">
@@ -93,10 +94,13 @@
         data() {
             return {
                 logo: logoimg,
-                registrado: true,
+                registrado: true, // true por padrao
+                error: false, // false por padrao
+                msgError: '',
                 name_register: '',
                 email_register: '',
                 password_register: '',
+                password_confirm_register: '',
                 date_register: '',
                 date_to_register: '',
                 cpf: '',
@@ -111,9 +115,8 @@
                 let emailEqual;
 
                 await axios.get('http://localhost:3000/users').then((response) => {
-                    console.log(response.data)
                     
-                    emailEqual = this.checkEmail(this.email_register, response.data)
+                    emailEqual = this.checkEmail(this.email_register, response.data); // função verifica se existe um email cadastrado
 
                     if (this.password_register === this.password_confirm_register && emailEqual) {
                         
@@ -132,21 +135,34 @@
                             bought: this.bought
                         }
 
-                        console.log(data)
-
-                        axios({
+                        axios({                               // cadastra o usuario
                             method: 'Post',
                             url: 'http://localhost:3000/users',
                             data: data
                         }).then((res)=> {
                             console.log(res);
-                            document.querySelector('form').reset()
-                            this.registrado = !this.registrado
+                            document.querySelector('form').reset();
+                            this.registrado = !this.registrado;
                         })
+
                     } else {
-                        alert('erro')
-                        emailEqual = ''
-                        this.email_register = ''
+                        this.error = true;
+
+                        if (this.password_register === this.password_confirm_register) {
+                            this.msgError = `Parece que o e-mail que você inseriu já está em uso em nossa plataforma.`;
+                            this.email_register = '';
+                        } else {
+                            this.msgError = 'Senhas não batem!';
+                            this.password_confirm_register = '';
+                        }
+                        
+
+                        setTimeout(() => {
+                            this.error = false;
+                            this.msgError = '';
+                        }, 5000)
+
+                        emailEqual = '';
                     }
 
                 })
@@ -158,6 +174,17 @@
                     }
                 }
                 return true;
+            },
+            passwordConfirm(e) {
+                const input = e.target;
+
+                if (this.password_register === this.password_confirm_register) {
+                    input.classList.add('passwordTrue');
+                    input.classList.remove('passwordFalse');
+                } else {
+                    input.classList.remove('passwordTrue');
+                    input.classList.add('passwordFalse');
+                }
             }
         }
         
@@ -168,7 +195,7 @@
 <style scoped>
     section.register {
         width: 100%;
-        height: 100vh;
+        min-height: 100vh;
         padding: 50px 10%;
         display: flex;
         justify-content: center
@@ -181,13 +208,37 @@
     input:focus {
         outline: none;
         border: none;
-        
+    }
+
+    .passwordTrue {
+        outline: 1px solid #16a016 !important;
+        border: 1px solid #16a016 !important;
+    }
+
+    .passwordFalse {
+        outline: 1px solid #c9001b !important;
+        border: 1px solid #c9001b !important;
+    }
+
+    .msgError {
+        border: 1px solid #c9001b;
+        padding: 5px;
+        max-width: 400px;
+        border-radius: 6px;
+        color: #c9001b;
+        background: #e4445a6c;
     }
 
     input[type="date"]:not(:focus) {
         outline: none !important;
         border: 1px solid #e5e5e5 !important;
     }
+
+    input[type="date"]:not(:focus):required:valid {
+        outline: 1px solid #16a016 !important;
+        border: 1px solid #16a016 !important;
+    }
+
 
     input:required:valid {
         outline: 1px solid #16a016;

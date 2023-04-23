@@ -4,8 +4,8 @@
       <!-- <div class="logo_container"></div> -->
       <img :src="logo" alt="logo" class="logo_container">
       <div class="title_container">
-        <p class="title">Login to your Account</p>
-        <span class="subtitle">Get started with our app, just create an account and enjoy the experience.</span>
+        <p class="title">Faça login na sua conta</p>
+        <span class="subtitle">Comece a usar nossa plataforma, basta criar uma conta e aproveitar a experiência.</span>
       </div>
       <br>
 
@@ -74,23 +74,23 @@
           callback: handleCredentialResponse
         });
         google.accounts.id.renderButton(
-        document.getElementById("buttonDiv"),
-        { 
-          theme: "outline", 
-          size: "large",
-          width: 200 ,
-          type:"standard",
-          shape:"rectangular",
-          text:"signin_with.",
-          logo_alignment:"center",
-        }  // customization attributes
-      );
+          document.getElementById("buttonDiv"),
+          { 
+            theme: "outline", 
+            size: "large",
+            width: 200 ,
+            type:"standard",
+            shape:"rectangular",
+            text:"signin_with.",
+            logo_alignment:"center",
+          }  // customization attributes
+        );
     
-      google.accounts.id.prompt(); // also display the One Tap dialog
+        google.accounts.id.prompt(); // also display the One Tap dialog
       }
     },
     mounted() {
-      this.google()
+      this.google();
     }
   }
 
@@ -100,7 +100,7 @@
 
   section.login {
     width: 100%;
-    height: 100vh;
+    min-height: 100vh;
     padding: 50px 10%;
     display: flex;
     justify-content: center;

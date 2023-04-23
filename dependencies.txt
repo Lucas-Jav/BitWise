@@ -1,3 +1,4 @@
 cpf gerador: https://www.npmjs.com/package/gerador-validador-cpf
 dayjs: https://day.js.org/docs/en/parse/string-format
 axios: https://axios-http.com/ptbr/docs/api_intro 
+gerar emails: https://www.invertexto.com/gerador-email-temporario
