@@ -1,12 +1,17 @@
 <template>
-    <div>
-        <h2>User Profile</h2>
-        <p>ID: {{ $route.params.id }}</p>
-    </div>
+    <main>
+        <div class="person">
+            <img :src="user.img" :alt="'img-' + user.name">
+            <h2>{{ user.name }}</h2>
+            <span><strong>ID:</strong>{{ user.id }}</span>
+        </div>
+        
+        
+    </main>
 </template>
 
 <script>
-
+    import axios from 'axios';
 
     export default {
         name: 'UserProfileView',
@@ -19,6 +24,8 @@
                     password: '',
                     birthday: '',
                     cpf: '',
+                    cep: '',
+                    img: '',
                     cart: [],
                     bought: []
                 }
@@ -36,7 +43,9 @@
                         email: data.email,
                         password: data.password,
                         birthday: data.birthday,
-                        cpf: data.cpf
+                        cpf: data.cpf,
+                        cep: data.cep,
+                        img: data.img,
                     }
 
                     console.log(this.user)
@@ -51,3 +60,21 @@
     }
 
 </script>
+
+<style scoped>
+
+    div.person {
+        width: 100%;
+        height: auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    div.person img{
+        width: 100px;
+    }
+
+
+</style>

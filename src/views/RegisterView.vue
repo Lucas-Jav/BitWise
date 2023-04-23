@@ -89,6 +89,7 @@
     import axios from 'axios'
     import { generate } from 'gerador-validador-cpf'
 
+
     export default {
         name: 'RegisterView',
         data() {
@@ -104,6 +105,9 @@
                 date_register: '',
                 date_to_register: '',
                 cpf: '',
+                cep: '',
+                token: '',
+                imgPerfil: '',
                 cart: [],
                 bought: [],
                 logged: false
@@ -131,6 +135,9 @@
                             birthday: dayjs(this.date_register).format('DD/MM/YYYY'),
                             account_created: this.date_to_register,
                             cpf: this.cpf,
+                            cep: this.gerarCEP(),
+                            token: this.generateToken(),
+                            img: this.gerarImg(),
                             cart: this.cart,
                             bought: this.bought
                         }
@@ -140,7 +147,6 @@
                             url: 'http://localhost:3000/users',
                             data: data
                         }).then((res)=> {
-                            console.log(res);
                             document.querySelector('form').reset();
                             this.registrado = !this.registrado;
                         })
@@ -185,9 +191,47 @@
                     input.classList.remove('passwordTrue');
                     input.classList.add('passwordFalse');
                 }
+            },
+            gerarCEP() {
+                let cep = '';
+                for (let i = 0; i < 8; i++) {
+                    cep += Math.floor(Math.random() * 10);
+                    if (i == 1) {
+                        cep += '';
+                    }
+                    if (i == 4) {
+                        cep += '-';
+                    }
+                }
+                    return cep;
+            },
+            gerarImg() {
+                const numberRandom = Math.floor(Math.random() * 5000) + 1;
+                const img = `https://avatars.dicebear.com/api/bottts/${numberRandom}.svg`;
+                
+                return img;
+            },
+            generateToken() {
+                const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+                const numbers = '0123456789';
+                let token = '';
+                
+                for (let i = 0; i < 5; i++) {
+                    token += letters.charAt(Math.floor(Math.random() * letters.length));
+                }
+                
+                for (let i = 0; i < 5; i++) {
+                    token += numbers.charAt(Math.floor(Math.random() * numbers.length));
+                }
+
+                return token;
             }
-        }
-        
+        },
+        created() {
+            if (localStorage.getItem('token')) {
+                this.$router.push('/user/' + localStorage.getItem('userId') + '/home');
+            }
+        },
     }
 
 </script>

@@ -1,6 +1,6 @@
 <template>
   <section class="login">
-    <form class="form_container">
+    <form class="form_container" @submit="login">
       <!-- <div class="logo_container"></div> -->
       <img :src="logo" alt="logo" class="logo_container">
       <div class="title_container">
@@ -54,6 +54,7 @@
 
 <script>
   import logoimg from '@/assets/logo-navbar.png'
+  import axios from 'axios'
 
   function handleCredentialResponse(response) {
     const data = jwt_decode(response.credential)
@@ -64,7 +65,9 @@
     name: 'LoginView',
     data() {
       return {
-        logo: logoimg
+        logo: logoimg,
+        password_login: '',
+        email_login: ''
       }
     },
     methods: {
@@ -87,6 +90,34 @@
         );
     
         google.accounts.id.prompt(); // also display the One Tap dialog
+      },
+      async login(e) {
+        e.preventDefault()
+
+        await axios.get('http://localhost:3000/users').then((response) => {
+          const checkData = this.checkEmailPassword(this.email_login, this.password_login, response.data)
+          
+          if (checkData.id) {
+            const id = checkData.id;
+            const token = checkData.token;
+
+            // seta o token e o id para que tenha segurança de acesso
+            localStorage.setItem('token', token);
+            localStorage.setItem('userId', id);
+            this.$router.push(`user/${id}/home`);
+          }
+        })
+        
+      },
+      checkEmailPassword(email, senha, array) {
+        const usuarioEncontrado = array.find(usuario => usuario.email === email && usuario.password === senha);
+        
+        return usuarioEncontrado ? usuarioEncontrado : false;
+      }
+    },
+    created() {
+      if (localStorage.getItem('token')) {
+        this.$router.push('/user/' + localStorage.getItem('userId') + '/home');
       }
     },
     mounted() {

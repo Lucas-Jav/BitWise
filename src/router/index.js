@@ -16,7 +16,17 @@ const routes = [
   {
     path: '/login',
     name: 'login',
-    component: LoginView
+    component: LoginView,
+    async logout() {
+      localStorage.removeItem('token');
+      localStorage.removeItem('userId');
+      this.$router.push('/login');
+    },
+    beforeRouteEnter(to, from, next) {
+      const vm = this;
+      vm.logout();
+      next();
+    },
   },
   {
     path: '/register',
@@ -24,26 +34,37 @@ const routes = [
     component:  RegisterView
   },
   {
-    path: '/user',
+    path: '/user/:id',
     name: 'user',
     component: UserView,
+    meta: { requiresAuth: true },
     children: [
       {
-        path: ':id/home',
+        path: 'home',
         name: 'homeUser',
         component: UserHomeView
       },
       {
-        path: ':id/profile',
+        path: 'profile',
         name: 'profileUser',
         component: UserProfileView
       },
       {
-        path: ':id/cart',
+        path: 'cart',
         name: 'cartUser',
         component: UserCartView
       }
-    ]
+    ],
+    beforeEnter: (to, from, next) => {
+      const userId = to.params.id;
+      const authenticatedUserId = localStorage.getItem('userId');
+
+      if (userId === authenticatedUserId) {
+        next();
+      } else {
+        next('/login');
+      }
+    }
   }
 ]
 
@@ -51,5 +72,16 @@ const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes
 })
+
+router.beforeEach((to, from, next) => {
+  const requiresAuth = to.matched.some(record => record.meta.requiresAuth);
+  const isAuthenticated = localStorage.getItem('token') !== null;
+
+  if (requiresAuth && !isAuthenticated) {
+    next('/login');
+  } else {
+    next();
+  }
+});
 
 export default router

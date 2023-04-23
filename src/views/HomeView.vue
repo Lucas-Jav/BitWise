@@ -8,9 +8,15 @@
 <script>
 
 
-export default {
-  name: 'HomeView'
-}
+  export default {
+    name: 'HomeView',
+    created() {
+      if (localStorage.getItem('token')) {
+        this.$router.push('/user/' + localStorage.getItem('userId') + '/home');
+      }
+    }
+  }
+  
 </script>
 
 
