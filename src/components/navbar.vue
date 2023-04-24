@@ -10,7 +10,7 @@
             <router-link :to="'/user/' + $route.params.id + '/home'">Home</router-link>
             <router-link :to="'/user/' + $route.params.id + '/profile'">Profile</router-link>
             <router-link :to="'/user/' + $route.params.id + '/cart'">Cart</router-link>
-            <router-link to="" @click="logout">Exit</router-link>
+            <router-link to="" @click="$emit('logout')">Exit</router-link>
         </nav>
         <nav class="desktop" v-else> <!-- section for desktop -->
             <router-link to="/">Home</router-link>
@@ -37,15 +37,9 @@ export default {
         'alt'
     ],
     emits: [
-        'openModal'
-    ],
-    methods: {
-        async logout() {
-            localStorage.removeItem('token');
-            localStorage.removeItem('userId');
-            this.$router.push('/login');
-        }
-    }
+        'openModal',
+        'logout'
+    ]
 }
 
 </script>

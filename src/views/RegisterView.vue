@@ -115,7 +115,7 @@
         },
         methods: {
             async registerNewUser(e) {
-                e.preventDefault()
+                e.preventDefault();
                 let emailEqual;
 
                 await axios.get('http://localhost:3000/users').then((response) => {
@@ -166,7 +166,7 @@
                         setTimeout(() => {
                             this.error = false;
                             this.msgError = '';
-                        }, 5000)
+                        }, 5000);
 
                         emailEqual = '';
                     }
@@ -264,15 +264,6 @@
         border: 1px solid #c9001b !important;
     }
 
-    .msgError {
-        border: 1px solid #c9001b;
-        padding: 5px;
-        font-size: 15px;
-        max-width: 490px;
-        border-radius: 6px;
-        color: #c9001b;
-        background: #e4445a6c;
-    }
 
     input[type="date"]:not(:focus) {
         outline: none !important;

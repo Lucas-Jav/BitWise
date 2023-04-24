@@ -1,6 +1,6 @@
 <template>
-  <Navbar :logo="logo" alt="logo"  @openModal="togleModal"/>
-  <ModalMenuVue v-if="modal" :logo="logo" @closeModal="togleModal"/>
+  <Navbar :logo="logo" alt="logo"  @openModal="togleModal" @logout="logout"/>
+  <ModalMenuVue v-if="modal" :logo="logo" @closeModal="togleModal" @logout="logout" />
   <router-view />
   <footerVue :logo="logo" alt="logo"/>
 </template>
@@ -27,6 +27,11 @@
     methods: {
       togleModal() {  // abre ou fecha o modal
         this.modal = !this.modal;
+      },
+      async logout() {
+        localStorage.removeItem('token');
+        localStorage.removeItem('userId');
+        this.$router.push('/login');
       }
     }
   }
@@ -211,6 +216,16 @@
     font-size: 0.75rem;
     color: #8B8E98;
     text-decoration: underline;
+  }
+
+  .msgError {
+    border: 1px solid #c9001b;
+    padding: 5px;
+    font-size: 15px;
+    max-width: 490px;
+    border-radius: 6px;
+    color: #c9001b;
+    background: #e4445a6c;
   }
 
 </style>

@@ -59,6 +59,21 @@
       "cart": [],
       "bought": [],
       "id": 3
+    },
+    {
+      "name": "maycon g",
+      "logged": false,
+      "email": "nahun3027@uorak.com",
+      "password": "919110",
+      "birthday": "24/03/2004",
+      "account_created": "23/04/2023",
+      "cpf": "340.540.468-19",
+      "cep": "13259-806",
+      "token": "CGFEK90374",
+      "img": "https://avatars.dicebear.com/api/bottts/2326.svg",
+      "cart": [],
+      "bought": [],
+      "id": 4
     }
   ],
   "seller": [

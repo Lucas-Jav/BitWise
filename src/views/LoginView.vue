@@ -8,7 +8,8 @@
         <span class="subtitle">Comece a usar nossa plataforma, basta criar uma conta e aproveitar a experiência.</span>
       </div>
       <br>
-
+      <span v-if="error" class="msgError">{{ msgError }}</span>
+      <br>
       <div class="input_container">
         <label class="input_label" for="email_field">Email</label>
         <svg fill="none" viewBox="0 0 24 24" height="24" width="24" xmlns="http://www.w3.org/2000/svg" class="icon">
@@ -67,7 +68,9 @@
       return {
         logo: logoimg,
         password_login: '',
-        email_login: ''
+        email_login: '',
+        error: false,
+        msgError: '',
       }
     },
     methods: {
@@ -95,7 +98,7 @@
         e.preventDefault()
 
         await axios.get('http://localhost:3000/users').then((response) => {
-          const checkData = this.checkEmailPassword(this.email_login, this.password_login, response.data)
+          const checkData = this.checkEmailPassword(this.email_login, this.password_login, response.data);
           
           if (checkData.id) {
             const id = checkData.id;
@@ -105,6 +108,15 @@
             localStorage.setItem('token', token);
             localStorage.setItem('userId', id);
             this.$router.push(`user/${id}/home`);
+          } else {
+            this.error = true;
+
+            this.msgError = "Email ou senha estão incorretos!";
+
+            setTimeout(() => {
+              this.error = false;
+              this.msgError = '';
+            }, 5000);
           }
         })
         

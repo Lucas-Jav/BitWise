@@ -9,7 +9,12 @@
         <main>
 
         </main>
-        <footer class="modalfooter">
+        <footer v-if="$route.params.id" class="modalfooter">
+            <router-link to="" class="login" @click="$emit('closeModal')">
+                <strong>Exit</strong>
+            </router-link>
+        </footer>
+        <footer v-else class="modalfooter">
             <router-link to="/login" class="login" @click="$emit('closeModal')">
                 <strong>Login</strong>
             </router-link>
