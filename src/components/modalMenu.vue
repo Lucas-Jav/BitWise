@@ -10,7 +10,7 @@
 
         </main>
         <footer v-if="$route.params.id" class="modalfooter">
-            <router-link to="" class="login" @click="$emit('closeModal')">
+            <router-link to="" class="login" @click="$emit('closeModal'),$emit('logout')">
                 <strong>Exit</strong>
             </router-link>
         </footer>
@@ -33,7 +33,8 @@
             'logo'
         ],
         emits: [
-            'closeModal'
+            'closeModal',
+            'logout'
         ]
     }
 

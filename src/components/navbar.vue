@@ -6,13 +6,13 @@
         <router-link to="/" v-else>
             <img :src="logo" :alt="alt" id="logo">
         </router-link>
-        <nav class="desktop" v-if="$route.params.id">
+        <nav class="desktop" v-if="$route.params.id"> <!-- section for desktop logged-->
             <router-link :to="'/user/' + $route.params.id + '/home'">Home</router-link>
             <router-link :to="'/user/' + $route.params.id + '/profile'">Profile</router-link>
             <router-link :to="'/user/' + $route.params.id + '/cart'">Cart</router-link>
             <router-link to="" @click="$emit('logout')">Exit</router-link>
         </nav>
-        <nav class="desktop" v-else> <!-- section for desktop -->
+        <nav class="desktop" v-else> <!-- section for desktop offline -->
             <router-link to="/">Home</router-link>
             <router-link to="/login">Login</router-link>
             <router-link to="/register">Register</router-link>
