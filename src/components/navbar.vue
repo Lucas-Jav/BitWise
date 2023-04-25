@@ -1,15 +1,15 @@
 <template>
     <header>
-        <router-link :to="'/user/' + $route.params.id + '/home'" v-if="$route.params.id">
+        <router-link :to="'/user/' + userId + '/home'" v-if="userId">
             <img :src="logo" :alt="alt" id="logo">
         </router-link>
         <router-link to="/" v-else>
             <img :src="logo" :alt="alt" id="logo">
         </router-link>
-        <nav class="desktop" v-if="$route.params.id"> <!-- section for desktop logged-->
-            <router-link :to="'/user/' + $route.params.id + '/home'">Home</router-link>
-            <router-link :to="'/user/' + $route.params.id + '/profile'">Profile</router-link>
-            <router-link :to="'/user/' + $route.params.id + '/cart'">Cart</router-link>
+        <nav class="desktop" v-if="userId"> <!-- section for desktop logged-->
+            <router-link :to="'/user/' + userId + '/home'">Home</router-link>
+            <router-link :to="'/user/' + userId + '/profile'">Profile</router-link>
+            <router-link :to="'/user/' + userId + '/cart'">Cart</router-link>
             <router-link to="" @click="$emit('logout')">Exit</router-link>
         </nav>
         <nav class="desktop" v-else> <!-- section for desktop offline -->
@@ -34,7 +34,8 @@ export default {
     name: 'Navbar',
     props: {
         logo: String,
-        alt: String
+        alt: String,
+        userId: String
     },
     emits: [
         'openModal',

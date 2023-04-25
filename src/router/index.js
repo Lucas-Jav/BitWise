@@ -4,8 +4,9 @@ import RegisterView from '@/views/RegisterView.vue'
 import LoginView from '@/views/LoginView.vue'
 import UserView from '@/views/User/UserView.vue'
 import UserProfileView from '@/views/User/UserProfileView.vue'
-import UserHomeView from '@/views/User/UserHomeView'
-import UserCartView from '@/views/User/UserCartView'
+import UserHomeView from '@/views/User/UserHomeView.vue'
+import UserCartView from '@/views/User/UserCartView.vue'
+import UserNotFoundView from '@/views/User/UserNotFoundView.vue'
 
 const routes = [
   {
@@ -58,6 +59,7 @@ const routes = [
     beforeEnter: (to, from, next) => {
       const userId = to.params.id;
       const authenticatedUserId = localStorage.getItem('userId');
+      console.log(from)
 
       if (userId === authenticatedUserId) {
         next();
@@ -65,6 +67,15 @@ const routes = [
         next('/login');
       }
     }
+  },
+  {
+    path: '/:pathMatch(.*)*',
+    redirect: '/404'
+  },
+  {
+    path: '/404',
+    name: 'not-found',
+    component: UserNotFoundView
   }
 ]
 
@@ -73,7 +84,28 @@ const router = createRouter({
   routes
 })
 
+// guarda de rota global
 router.beforeEach((to, from, next) => {
+  const isLoggedIn = localStorage.getItem('token') !== null
+
+  if (to.matched.some(record => record.meta.requiresAuth)) {
+    if (!isLoggedIn) {
+      next({ name: 'login' })
+    } else {
+      next()
+    }
+  } else if (to.matched.some(record => record.meta.requiresGuest)) {
+    if (isLoggedIn) {
+      next({ name: 'home' })
+    } else {
+      next()
+    }
+  } else {
+    next()
+  }
+})
+
+/* router.beforeEach((to, from, next) => {
   const requiresAuth = to.matched.some(record => record.meta.requiresAuth);
   const isAuthenticated = localStorage.getItem('token') !== null;
 
@@ -82,6 +114,6 @@ router.beforeEach((to, from, next) => {
   } else {
     next();
   }
-});
+}); */
 
 export default router
