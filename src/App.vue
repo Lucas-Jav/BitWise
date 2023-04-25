@@ -32,6 +32,7 @@
         this.modal = !this.modal;
       },
       async logout() {
+        this.IdUsuario = false
         localStorage.removeItem('token');
         localStorage.removeItem('userId');
         this.$router.push('/login');

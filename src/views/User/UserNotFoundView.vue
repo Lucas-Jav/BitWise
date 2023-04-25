@@ -3,7 +3,7 @@
         <div>
             <h1><strong>404</strong></h1>
             <span>Page Not Found</span>
-            <button @click="$router.go(-1)">Voltar</button>
+            <button @click="checkUser">Voltar</button>
         </div>
     </section>
 </template>
@@ -11,7 +11,19 @@
 <script>
 
     export default {
-        name: 'UserNotFoundView'
+        name: 'UserNotFoundView',
+        methods: {
+            checkUser() {
+                const userId = localStorage.getItem('userId');
+                const token = localStorage.getItem('token')
+
+                if (userId || token) {
+                    this.$router.push('/user/' + userId + '/home');
+                } else {
+                    this.$router.go(-1);
+                }
+            }
+        }
     }
 
 </script>

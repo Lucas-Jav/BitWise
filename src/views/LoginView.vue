@@ -71,6 +71,7 @@
         email_login: '',
         error: false,
         msgError: '',
+        routerBefore: ''
       }
     },
     methods: {
@@ -130,7 +131,7 @@
     created() {
       if (localStorage.getItem('token')) {
         this.$router.push('/user/' + localStorage.getItem('userId') + '/home');
-      }
+      } 
     },
     mounted() {
       this.google();
