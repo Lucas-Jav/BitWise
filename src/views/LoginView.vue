@@ -42,12 +42,12 @@
         <span>Sign In</span>
       </button>
 
-      <div class="separator">
+      <div class="separator" v-if="loginWithGoogle">
         <hr class="line">
         <span>Or</span>
         <hr class="line">
       </div>
-      <div id="buttonDiv"></div>
+      <div id="buttonDiv" v-if="loginWithGoogle"></div>
       <p class="note">Terms of use &amp; Conditions</p>
     </form>
   </section>
@@ -57,7 +57,7 @@
   import logoimg from '@/assets/logo-navbar.png'
   import axios from 'axios'
 
-  function handleCredentialResponse(response) {
+  function handleCredentialResponse(response) {  // function de resposta da api de login com o google
     const data = jwt_decode(response.credential)
     console.log(data)
   }
@@ -69,9 +69,9 @@
         logo: logoimg,
         password_login: '',
         email_login: '',
-        error: false,
+        error: false,  // ativa quando da algum erro de login
         msgError: '',
-        routerBefore: ''
+        loginWithGoogle: false // esta dando erro (resolver futuramente)
       }
     },
     methods: {
@@ -134,7 +134,7 @@
       } 
     },
     mounted() {
-      this.google();
+      /* this.google(); */ //nao esta funcionando ainda
     }
   }
 

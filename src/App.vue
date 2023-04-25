@@ -163,6 +163,7 @@
     text-align: center;
     color: #ffffff;
     cursor: pointer;
+    margin-top: 10px;
   }
 
   .sign-in_ggl {

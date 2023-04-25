@@ -3,7 +3,7 @@
         <div>
             <h1><strong>404</strong></h1>
             <span>Page Not Found</span>
-            <button @click="checkUser">Voltar</button>
+            <button @click="backForBeforePage">Voltar</button>
         </div>
     </section>
 </template>
@@ -13,7 +13,7 @@
     export default {
         name: 'UserNotFoundView',
         methods: {
-            checkUser() {
+            backForBeforePage() {
                 const userId = localStorage.getItem('userId');
                 const token = localStorage.getItem('token')
 

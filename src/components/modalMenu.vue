@@ -1,7 +1,7 @@
 <template>
     <section class="modais">
         <header class="modalheader">
-            <img :src="logo" alt="logo">
+            <img :src="logo" alt="logo" loading="lazy">
             <button @click="$emit('closeModal')">
                 <strong>X</strong>
             </button>

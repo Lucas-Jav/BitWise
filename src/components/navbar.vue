@@ -1,9 +1,9 @@
 <template>
     <header>
-        <router-link :to="'/user/' + ($route.params.id || userId) + '/home'" v-if="$route.params.id || userId">
+        <router-link :to="'/user/' + ($route.params.id || userId) + '/home'" v-if="$route.params.id || userId"> <!-- logo/ancora user logado -->
             <img :src="logo" :alt="alt" id="logo">
         </router-link>
-        <router-link to="/" v-else>
+        <router-link to="/" v-else> <!-- logo/ancora user deslogado -->
             <img :src="logo" :alt="alt" id="logo">
         </router-link>
         <nav class="desktop" v-if="$route.params.id || userId"> <!-- section for desktop logged-->
