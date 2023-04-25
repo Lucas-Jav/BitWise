@@ -90,7 +90,7 @@ router.beforeEach((to, from, next) => {
 
   if (to.matched.some(record => record.meta.requiresAuth)) {
     if (!isLoggedIn) {
-      next({ name: 'login' })
+      next({ name: 'not-found' })
     } else {
       next()
     }

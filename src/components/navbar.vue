@@ -1,12 +1,12 @@
 <template>
     <header>
-        <router-link :to="'/user/' + userId + '/home'" v-if="userId">
+        <router-link :to="'/user/' + userId + '/home'" v-if="$route.params.id || userId">
             <img :src="logo" :alt="alt" id="logo">
         </router-link>
         <router-link to="/" v-else>
             <img :src="logo" :alt="alt" id="logo">
         </router-link>
-        <nav class="desktop" v-if="userId"> <!-- section for desktop logged-->
+        <nav class="desktop" v-if="$route.params.id || userId"> <!-- section for desktop logged-->
             <router-link :to="'/user/' + userId + '/home'">Home</router-link>
             <router-link :to="'/user/' + userId + '/profile'">Profile</router-link>
             <router-link :to="'/user/' + userId + '/cart'">Cart</router-link>

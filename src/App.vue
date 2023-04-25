@@ -1,8 +1,8 @@
 <template>
   <Navbar :logo="logo" alt="logo"  @openModal="togleModal" 
   @logout="logout" :userId="IdUsuario"/>
-  <ModalMenuVue v-if="modal" :logo="logo" @closeModal="togleModal" 
-  @logout="logout" :userId="IdUsuario" />
+  <ModalMenuVue v-if="modal" :logo="logo" @closeModal="togleModal"  
+  @logout="logout" :userId="IdUsuario" /> 
   <router-view />
   <footerVue :logo="logo" alt="logo"/>
 </template>
@@ -19,7 +19,7 @@
       return {
         logo: logoNav,
         modal: false, // false === fechado OU true === aberto
-        IdUsuario: localStorage.getItem('userId') ?? ''
+        IdUsuario: localStorage.getItem('userId') ?? '' 
       }
     },
     components: {
