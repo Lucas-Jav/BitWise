@@ -1,7 +1,7 @@
 <template>
     <section>
         <footer class="top">
-            <img :src="logo" :alt="alt" class="logo">
+            <img :src="logo" :alt="alt" class="logo" loading="lazy">
             <div class="links">
                 <div>
                     <h2>Platform</h2>
@@ -30,10 +30,10 @@
             </div>
             <div class="links">
                 <a :href="linkGit" class="fa-brands fa-github" target="_blank">
-                    <img src="https://img.icons8.com/ios-glyphs/30/null/github.png"/>
+                    <img src="https://img.icons8.com/ios-glyphs/30/null/github.png" loading="lazy"/>
                 </a>
                 <a :href="linkLinke" class="fa-brands fa-linkedin" target="_blank">
-                    <img src="https://img.icons8.com/ios-glyphs/30/null/linkedin.png"/>
+                    <img src="https://img.icons8.com/ios-glyphs/30/null/linkedin.png" loading="lazy"/>
                 </a>
             </div>
         </footer>
@@ -44,10 +44,10 @@
 
     export default {
         name: 'FooterVue',
-        props: [
-            'logo',
-            'alt'
-        ],
+        props: {
+            logo: String,
+            alt: String
+        },
         data() {
             return {
                 date: new Date().getFullYear(),

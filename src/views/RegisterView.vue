@@ -1,7 +1,7 @@
 <template>
     <section class="register">
         <form class="form_container" @submit="registerNewUser" v-if="registrado">
-            <img :src="logo" alt="logo" class="logo_container">
+            <img :src="logo" alt="logo" class="logo_container" loading="lazy">
             <div class="title_container">
                 <p class="title">Criar sua conta</p>
                 <span class="subtitle">Comece a usar nossa plataforma, basta criar uma conta e aproveitar a experiência.</span>
@@ -11,7 +11,7 @@
             <br>
             <div class="input_container">
                 <label class="input_label" for="email_field">Name</label>
-                <img src="https://img.icons8.com/ios/50/null/name--v1.png" class="icon" alt="icon"/>
+                <img src="https://img.icons8.com/ios/50/null/name--v1.png" class="icon" alt="icon" loading="lazy"/>
                 <input placeholder="Write your name" title="Inpit title" name="input-name" type="text" class="input_field"
                     v-model="name_register" pattern="^[A-Za-zÀ-ÖØ-öø-ÿ\s]{8,}$" required>
             </div>
@@ -61,7 +61,7 @@
             </div>
             <div class="input_container">
                 <label for="data_field" class="input_label">Date</label>
-                <img src="https://img.icons8.com/ios/50/null/calendar-10.png" class="icon" alt="icon"/>
+                <img src="https://img.icons8.com/ios/50/null/calendar-10.png" class="icon" alt="icon" loading="lazy"/>
                 <input type="date" name="input-date" class="input_field" v-model="date_register" required>
             </div>
             <button title="Sign In" type="submit" class="sign-in_btn">
@@ -70,7 +70,7 @@
             <p class="note">Terms of use &amp; Conditions</p>
         </form>
         <div class="form_container" v-else>
-            <img src="https://img.icons8.com/color/96/null/verified-account--v1.png" alt="verifique"/>
+            <img src="https://img.icons8.com/color/96/null/verified-account--v1.png" alt="verifique" loading="lazy"/>
             <h2>Parabéns!</h2>
             <span>Sua conta foi criada com sucesso. Você já pode fazer login e começar a 
                 explorar todos os recursos disponíveis em nosso site. Agradecemos por se juntar à 

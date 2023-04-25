@@ -32,10 +32,10 @@
 
 export default {
     name: 'Navbar',
-    props: [
-        'logo',
-        'alt'
-    ],
+    props: {
+        logo: String,
+        alt: String
+    },
     emits: [
         'openModal',
         'logout'

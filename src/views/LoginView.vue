@@ -2,7 +2,7 @@
   <section class="login">
     <form class="form_container" @submit="login">
       <!-- <div class="logo_container"></div> -->
-      <img :src="logo" alt="logo" class="logo_container">
+      <img :src="logo" alt="logo" class="logo_container" loading="lazy">
       <div class="title_container">
         <p class="title">Faça login na sua conta</p>
         <span class="subtitle">Comece a usar nossa plataforma, basta criar uma conta e aproveitar a experiência.</span>

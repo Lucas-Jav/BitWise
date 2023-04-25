@@ -9,12 +9,12 @@
         <main>
 
         </main>
-        <footer v-if="$route.params.id" class="modalfooter">
+        <footer v-if="$route.params.id" class="modalfooter"> <!-- section for mobile logged -->
             <router-link to="" class="login" @click="$emit('closeModal'),$emit('logout')">
                 <strong>Exit</strong>
             </router-link>
         </footer>
-        <footer v-else class="modalfooter">
+        <footer v-else class="modalfooter"> <!-- section for mobile not logged -->
             <router-link to="/login" class="login" @click="$emit('closeModal')">
                 <strong>Login</strong>
             </router-link>
@@ -29,9 +29,9 @@
 
     export default {
         name: 'ModalHeader',
-        props: [
-            'logo'
-        ],
+        props: {
+            logo: String
+        },
         emits: [
             'closeModal',
             'logout'

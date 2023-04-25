@@ -1,13 +1,18 @@
 <template>
     <section>
-        <router-view></router-view>
+        <routerView></routerView>
     </section>
 </template>
 
 <script>
 
     export default {
-        name: 'UserView'
+        name: 'UserView',
+        created() {
+            if (localStorage.getItem('token')) {
+                this.$router.push('/user/' + localStorage.getItem('userId') + '/home');
+            }
+        }
     }
 
 </script>
