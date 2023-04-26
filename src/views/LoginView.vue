@@ -105,6 +105,10 @@
             const id = checkData.id;
             const token = checkData.token;
 
+            axios.patch(`http://localhost:3000/users/${id}`, { // bota o usuario como logado na aplicação
+              logged: true
+            })
+
             // seta o token e o id para que tenha segurança de acesso
             localStorage.setItem('token', token);
             localStorage.setItem('userId', id);

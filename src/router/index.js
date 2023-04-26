@@ -7,6 +7,7 @@ import UserProfileView from '@/views/User/UserProfileView.vue'
 import UserHomeView from '@/views/User/UserHomeView.vue'
 import UserCartView from '@/views/User/UserCartView.vue'
 import UserNotFoundView from '@/views/User/UserNotFoundView.vue'
+import axios from 'axios'
 
 const routes = [
   {
@@ -19,6 +20,13 @@ const routes = [
     name: 'login',
     component: LoginView,
     async logout() {
+      const id = localStorage.getItem('userId');
+      const token = localStorage.getItem('token');
+
+      await axios.patch(`http://localhost:3000/users/${id}`, { // bota o usuario como deslogado na aplicação
+        logged: false
+      })
+
       localStorage.removeItem('token');
       localStorage.removeItem('userId');
       this.$router.push('/login');
@@ -59,7 +67,6 @@ const routes = [
     beforeEnter: (to, from, next) => {
       const userId = to.params.id;
       const authenticatedUserId = localStorage.getItem('userId');
-      console.log(from)
 
       if (userId === authenticatedUserId) {
         next();
@@ -86,7 +93,7 @@ const router = createRouter({
 
 // guarda de rota global
 router.beforeEach((to, from, next) => {
-  const isLoggedIn = localStorage.getItem('token') !== null
+  const isLoggedIn = localStorage.getItem('token') !== null && localStorage.getItem('userId') !== null;
 
   if (to.matched.some(record => record.meta.requiresAuth)) {
     if (!isLoggedIn) {

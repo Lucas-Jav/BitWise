@@ -12,6 +12,7 @@
   import logoNav from '@/assets/logo-navbar.png'
   import FooterVue from '@/components/footer.vue';
   import ModalMenuVue from '@/components/modalMenu.vue';
+  import axios from 'axios';
 
   export default {
     name: 'App',
@@ -33,6 +34,14 @@
       },
       async logout() {
         this.IdUsuario = false
+
+        const id = localStorage.getItem('userId');
+        const token = localStorage.getItem('token');
+
+        await axios.patch(`http://localhost:3000/users/${id}`, { // bota o usuario como deslogado na aplicação
+          logged: false
+        })
+
         localStorage.removeItem('token');
         localStorage.removeItem('userId');
         this.$router.push('/login');
