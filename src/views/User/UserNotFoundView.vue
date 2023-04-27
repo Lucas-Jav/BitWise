@@ -17,7 +17,7 @@
                 const userId = localStorage.getItem('userId');
                 const token = localStorage.getItem('token')
 
-                if (userId || token) {
+                if (userId && token) {
                     this.$router.push('/user/' + userId + '/home');
                 } else {
                     this.$router.go(-1);

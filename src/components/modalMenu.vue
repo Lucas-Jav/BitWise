@@ -9,7 +9,7 @@
         <main>
 
         </main>
-        <footer v-if="$route.params.id || userId" class="modalfooter"> <!-- section for mobile logged -->
+        <footer v-if="($route.params.id || (token && userId))" class="modalfooter"> <!-- section for mobile logged -->
             <router-link to="" class="login" @click="$emit('closeModal'),$emit('logout')">
                 <strong>Exit</strong>
             </router-link>
@@ -31,7 +31,8 @@
         name: 'ModalHeader',
         props: {
             logo: String,
-            userId: String
+            userId: String,
+            token: String
         },
         emits: [
             'closeModal',

@@ -36,7 +36,6 @@
                 await axios.get(`http://localhost:3000/users/${id}`).then((response) => {
                     const data = response.data;
                     
-
                     this.user = {
                         id: data.id,
                         name: data.name,
@@ -48,8 +47,6 @@
                         img: data.img,
                     }
 
-                    console.log(this.user)
-                    
                 })
             }
         },
