@@ -66,49 +66,49 @@
                 {
                     title: 'Seus pedidos',
                     description: 'Rastrear, devolver ou comprar produtos novamente',
-                    src: 'https://img.icons8.com/external-itim2101-lineal-color-itim2101/64/000000/external-delivery-man-male-occupation-avatar-itim2101-lineal-color-itim2101.png',
+                    src: 'https://img.icons8.com/ios/100/null/order-history.png',
                     link: `/user/${this.user.id}/account/requests`
                 },
                 {
                     title: 'Acesso e segurança',
                     description: 'Gerenciar senha, e-mail, cpf e número de celular',
-                    src: 'https://img.icons8.com/fluency/96/000000/cyber-security.png',
+                    src: 'https://img.icons8.com/ios/100/null/cyber-security.png',
                     link: `/user/${this.user.id}/account/security`
                 },
                 {
                     title: 'Endereços',
                     description: 'Alterar endereços para pedidos',
-                    src: 'https://img.icons8.com/bubbles/100/000000/address.png',
+                    src: 'https://img.icons8.com/ios/100/null/order-delivered.png',
                     link: `/user/${this.user.id}/account/address`
                 },
                 {
                     title: 'Seus pagamentos',
                     description: 'Gerenciar ou adicionar formas de pagamento e ver suas transações',
-                    src: 'https://img.icons8.com/fluency/96/000000/request-money.png',
+                    src: 'https://img.icons8.com/ios/100/null/credit-card-cash-withdrawal.png',
                     link: `/user/${this.user.id}/account/payment`
                 },
                 {
                     title: 'Atendimento',
                     description: 'Explorar opções de autoatendimento, artigos de ajuda ou fale conosco',
-                    src: 'https://img.icons8.com/bubbles/100/000000/online-support.png',
+                    src: 'https://img.icons8.com/ios/100/null/online-support--v1.png',
                     link: `/user/${this.user.id}/account/service`
                 },
                 {
                     title: 'Vales-presente',
                     description: 'Ver saldo ou resgatar um vale presente',
-                    src: 'https://img.icons8.com/color/96/000000/gift--v1.png',
+                    src: 'https://img.icons8.com/ios/100/null/gift--v1.png',
                     link: `/user/${this.user.id}/account/gifts`
                 },
                 {
                     title: 'Suas mensagens',
                     description: 'Visualize ou responda a mensagens da BitWise, vendedores e compradores',
-                    src: 'https://img.icons8.com/retro/96/000000/mailbox-closed-flag-up.png',
+                    src: 'https://img.icons8.com/ios/100/null/messaging-.png',
                     link: `/user/${this.user.id}/account/messages`
                 },
                 {
                     title: 'Suas listas',
                     description: 'Gerenciar, compartilhar, ou criar listas de desejos',
-                    src: 'https://img.icons8.com/bubbles/100/000000/list.png',
+                    src: 'https://img.icons8.com/ios/100/null/shortlist.png',
                     link: `/user/${this.user.id}/account/list`
                 }
             ]
@@ -197,7 +197,6 @@
             width: 260px;
             padding: 15px;
         }
-
 
         div.cards a.card img {
         height: 60px;

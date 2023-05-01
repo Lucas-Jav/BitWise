@@ -4,3 +4,4 @@ axios: https://axios-http.com/ptbr/docs/api_intro
 gerar emails: https://www.invertexto.com/gerador-email-temporario
 google recaptcha: https://console.cloud.google.com/security/recaptcha/6Ldbr68lAAAAAFvqBjBRU0GfjM5viPFVKPN199Al/details?authuser=0&project=bitwise-1682269549020
 https://avatars.dicebear.com/api/bottts/3.svg  imgs ate 5000
+icons imgs: https://icons8.com.br/icon/set/lista/ios
