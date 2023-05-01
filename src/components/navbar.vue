@@ -54,11 +54,17 @@ export default {
     header {
         width: 100%;
         height: 70px;
-        border-bottom: 2px solid #000;
+        border-bottom: 1px solid #565959;
         display: flex;
         justify-content: space-between;
         align-items: center;
         padding: 10px 10%;
+    }
+
+    @media (max-width: 1552px) {
+        header {
+            padding: 10px 20px;
+        }
     }
 
     header a  {
@@ -75,12 +81,11 @@ export default {
         cursor: pointer;
         font-size: 1rem;
         border-bottom: 1px solid transparent;
-
     }
 
     header nav.desktop a:hover {
         transition: 1s;
-        border-bottom: 1px solid #000;
+        border-bottom: 1px solid #111;
     }
 
     img {

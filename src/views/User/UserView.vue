@@ -51,8 +51,19 @@
     section {
         width: 100%;
         min-height: 100vh;
-        padding: 50px 10%;
+        padding: 50px 11%;
     }
 
+    @media (max-width: 1547px) {
+        section {
+            padding: 50px 5%;
+        }
+    }
+
+    @media (max-width: 425px) {
+        section {
+            padding: 50px 0px;
+        }
+    }
 
 </style>

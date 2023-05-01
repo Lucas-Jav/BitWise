@@ -64,7 +64,7 @@
     section {
     left: 0;
     bottom: 0px;
-    border-top: 2px solid #000;
+    border-top: 1px solid #565959;
     padding-top: 60px;
     }
 
@@ -82,7 +82,7 @@
     }
 
     footer.top {
-        border-bottom: 2px solid #000;
+        border-bottom: 1px solid #565959;
         padding-bottom: 20px;
     }
 
