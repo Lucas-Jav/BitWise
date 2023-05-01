@@ -1,6 +1,8 @@
 <template>
-  <Navbar :logo="logo" alt="logo"  @openModal="togleModal" @logout="logout"/>
-  <ModalMenuVue v-if="modal" :logo="logo" @closeModal="togleModal" @logout="logout" />
+  <Navbar :logo="logo" alt="logo"  @openModal="togleModal" 
+  @logout="logout" :userId="IdUsuario" :token="tokenUser"/>
+  <ModalMenuVue v-if="modal" :logo="logo" @closeModal="togleModal"  
+  @logout="logout" :userId="IdUsuario" :token="tokenUser"/> 
   <router-view />
   <footerVue :logo="logo" alt="logo"/>
 </template>
@@ -10,13 +12,16 @@
   import logoNav from '@/assets/logo-navbar.png'
   import FooterVue from '@/components/footer.vue';
   import ModalMenuVue from '@/components/modalMenu.vue';
+  import axios from 'axios';
 
   export default {
     name: 'App',
     data() {
       return {
         logo: logoNav,
-        modal: false // false === fechado OU true === aberto
+        modal: false, // false === fechado OU true === aberto
+        IdUsuario: localStorage.getItem('userId') ?? false ,
+        tokenUser: localStorage.getItem('token') ?? false
       }
     },
     components: {
@@ -29,10 +34,31 @@
         this.modal = !this.modal;
       },
       async logout() {
+        this.IdUsuario = false
+
+        const id = localStorage.getItem('userId');
+        const token = localStorage.getItem('token');
+
+        await axios.patch(`http://localhost:3000/users/${id}`, { // bota o usuario como deslogado na aplicação
+          logged: false
+        })
+
         localStorage.removeItem('token');
         localStorage.removeItem('userId');
         this.$router.push('/login');
       }
+    },
+    created() {
+      const userId = localStorage.getItem('userId');
+      const token = localStorage.getItem('token');
+
+      if (userId && token) {
+        console.log('tudo okay')
+      } else {
+        localStorage.removeItem('userId')
+        localStorage.removeItem('token')
+      }
+    
     }
   }
 
@@ -159,6 +185,7 @@
     text-align: center;
     color: #ffffff;
     cursor: pointer;
+    margin-top: 10px;
   }
 
   .sign-in_ggl {

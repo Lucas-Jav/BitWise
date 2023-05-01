@@ -42,12 +42,12 @@
         <span>Sign In</span>
       </button>
 
-      <div class="separator">
+      <div class="separator" v-if="loginWithGoogle">
         <hr class="line">
         <span>Or</span>
         <hr class="line">
       </div>
-      <div id="buttonDiv"></div>
+      <div id="buttonDiv" v-if="loginWithGoogle"></div>
       <p class="note">Terms of use &amp; Conditions</p>
     </form>
   </section>
@@ -57,7 +57,7 @@
   import logoimg from '@/assets/logo-navbar.png'
   import axios from 'axios'
 
-  function handleCredentialResponse(response) {
+  function handleCredentialResponse(response) {  // function de resposta da api de login com o google
     const data = jwt_decode(response.credential)
     console.log(data)
   }
@@ -69,8 +69,9 @@
         logo: logoimg,
         password_login: '',
         email_login: '',
-        error: false,
+        error: false,  // ativa quando da algum erro de login
         msgError: '',
+        loginWithGoogle: false // esta dando erro (resolver futuramente)
       }
     },
     methods: {
@@ -104,6 +105,10 @@
             const id = checkData.id;
             const token = checkData.token;
 
+            axios.patch(`http://localhost:3000/users/${id}`, { // bota o usuario como logado na aplicação
+              logged: true
+            })
+
             // seta o token e o id para que tenha segurança de acesso
             localStorage.setItem('token', token);
             localStorage.setItem('userId', id);
@@ -128,12 +133,18 @@
       }
     },
     created() {
-      if (localStorage.getItem('token')) {
+      const userId = localStorage.getItem('userId');
+      const token = localStorage.getItem('token');
+
+      if (userId && token) {
         this.$router.push('/user/' + localStorage.getItem('userId') + '/home');
+      } else {
+        localStorage.removeItem('userId')
+        localStorage.removeItem('token')
       }
     },
     mounted() {
-      this.google();
+      /* this.google(); */ //nao esta funcionando ainda
     }
   }
 

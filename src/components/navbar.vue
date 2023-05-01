@@ -1,16 +1,16 @@
 <template>
     <header>
-        <router-link :to="'/user/' + $route.params.id + '/home'" v-if="$route.params.id">
+        <router-link :to="'/user/' + ($route.params.id || userId) + '/home'" v-if="($route.params.id || (token && userId))"> <!-- logo/ancora user logado -->
             <img :src="logo" :alt="alt" id="logo">
         </router-link>
-        <router-link to="/" v-else>
+        <router-link to="/" v-else> <!-- logo/ancora user deslogado -->
             <img :src="logo" :alt="alt" id="logo">
         </router-link>
-        <nav class="desktop" v-if="$route.params.id"> <!-- section for desktop logged-->
-            <router-link :to="'/user/' + $route.params.id + '/home'">Home</router-link>
-            <router-link :to="'/user/' + $route.params.id + '/profile'">Profile</router-link>
-            <router-link :to="'/user/' + $route.params.id + '/cart'">Cart</router-link>
-            <router-link to="" @click="$emit('logout')">Exit</router-link>
+        <nav class="desktop" v-if="($route.params.id || (token && userId))"> <!-- section for desktop logged-->
+            <router-link :to="'/user/' + ($route.params.id || userId) + '/home'">Home</router-link>
+            <router-link :to="'/user/' + ($route.params.id || userId) + '/account'">Account</router-link>
+            <router-link :to="'/user/' + ($route.params.id || userId) + '/cart'">Cart</router-link>
+            <router-link to="" @click="$emit('logout'),toggleModal">Exit</router-link>
         </nav>
         <nav class="desktop" v-else> <!-- section for desktop offline -->
             <router-link to="/">Home</router-link>
@@ -34,7 +34,9 @@ export default {
     name: 'Navbar',
     props: {
         logo: String,
-        alt: String
+        alt: String,
+        userId: String,
+        token: String
     },
     emits: [
         'openModal',

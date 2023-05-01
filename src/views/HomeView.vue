@@ -11,8 +11,14 @@
   export default {
     name: 'HomeView',
     created() {
-      if (localStorage.getItem('token')) {
+      const userId = localStorage.getItem('userId');
+      const token = localStorage.getItem('token');
+
+      if (userId && token) {
         this.$router.push('/user/' + localStorage.getItem('userId') + '/home');
+      } else {
+        localStorage.removeItem('userId')
+        localStorage.removeItem('token')
       }
     }
   }

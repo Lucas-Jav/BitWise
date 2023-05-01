@@ -1,7 +1,7 @@
 <template>
     <section class="modais">
         <header class="modalheader">
-            <img :src="logo" alt="logo">
+            <img :src="logo" alt="logo" loading="lazy">
             <button @click="$emit('closeModal')">
                 <strong>X</strong>
             </button>
@@ -9,7 +9,7 @@
         <main>
 
         </main>
-        <footer v-if="$route.params.id" class="modalfooter"> <!-- section for mobile logged -->
+        <footer v-if="($route.params.id || (token && userId))" class="modalfooter"> <!-- section for mobile logged -->
             <router-link to="" class="login" @click="$emit('closeModal'),$emit('logout')">
                 <strong>Exit</strong>
             </router-link>
@@ -30,7 +30,9 @@
     export default {
         name: 'ModalHeader',
         props: {
-            logo: String
+            logo: String,
+            userId: String,
+            token: String
         },
         emits: [
             'closeModal',

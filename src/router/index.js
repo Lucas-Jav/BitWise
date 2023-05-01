@@ -3,9 +3,11 @@ import HomeView from '@/views/HomeView.vue'
 import RegisterView from '@/views/RegisterView.vue'
 import LoginView from '@/views/LoginView.vue'
 import UserView from '@/views/User/UserView.vue'
-import UserProfileView from '@/views/User/UserProfileView.vue'
-import UserHomeView from '@/views/User/UserHomeView'
-import UserCartView from '@/views/User/UserCartView'
+import UserAccountView from '@/views/User/UserAccountView.vue'
+import UserHomeView from '@/views/User/UserHomeView.vue'
+import UserCartView from '@/views/User/UserCartView.vue'
+import UserNotFoundView from '@/views/User/UserNotFoundView.vue'
+import axios from 'axios'
 
 const routes = [
   {
@@ -18,6 +20,13 @@ const routes = [
     name: 'login',
     component: LoginView,
     async logout() {
+      const id = localStorage.getItem('userId');
+      const token = localStorage.getItem('token');
+
+      await axios.patch(`http://localhost:3000/users/${id}`, { // bota o usuario como deslogado na aplicação
+        logged: false
+      })
+
       localStorage.removeItem('token');
       localStorage.removeItem('userId');
       this.$router.push('/login');
@@ -38,6 +47,9 @@ const routes = [
     name: 'user',
     component: UserView,
     meta: { requiresAuth: true },
+    props: (route) => (
+      { userId: route.params.id }, { dados: route.params.dados }
+    ),
     children: [
       {
         path: 'home',
@@ -45,9 +57,19 @@ const routes = [
         component: UserHomeView
       },
       {
-        path: 'profile',
-        name: 'profileUser',
-        component: UserProfileView
+        path: 'account',
+        name: 'accountUser',
+        component: UserAccountView,
+        props: (route) => (  // data
+          { userId: route.params.id }, { dados: route.params.dados }
+        ),
+        beforeEnter: (to, from, next) => {
+          const authenticatedUserId = localStorage.getItem('userId');
+            axios.get(`http://localhost:3000/users/${authenticatedUserId}`).then(res => {
+              to.params.dados = res.data;
+              next();
+            })
+        }
       },
       {
         path: 'cart',
@@ -60,11 +82,27 @@ const routes = [
       const authenticatedUserId = localStorage.getItem('userId');
 
       if (userId === authenticatedUserId) {
-        next();
+        axios.get(`http://localhost:3000/users/${authenticatedUserId}`).then(res => { //data
+          to.params.dados = res.data;
+          next();
+        }).catch(err => {
+          console.error(err);
+          next('/');
+        })
+        
       } else {
         next('/login');
       }
     }
+  },
+  {
+    path: '/:pathMatch(.*)*',
+    redirect: '/404'
+  },
+  {
+    path: '/404',
+    name: 'not-found',
+    component: UserNotFoundView
   }
 ]
 
@@ -73,7 +111,28 @@ const router = createRouter({
   routes
 })
 
+// guarda de rota global
 router.beforeEach((to, from, next) => {
+  const isLoggedIn = localStorage.getItem('token') !== null && localStorage.getItem('userId') !== null;
+
+  if (to.matched.some(record => record.meta.requiresAuth)) {
+    if (!isLoggedIn) {
+      next({ name: 'not-found' })
+    } else {
+      next()
+    }
+  } else if (to.matched.some(record => record.meta.requiresGuest)) {
+    if (isLoggedIn) {
+      next({ name: 'home' })
+    } else {
+      next()
+    }
+  } else {
+    next()
+  }
+})
+
+/* router.beforeEach((to, from, next) => {
   const requiresAuth = to.matched.some(record => record.meta.requiresAuth);
   const isAuthenticated = localStorage.getItem('token') !== null;
 
@@ -82,6 +141,6 @@ router.beforeEach((to, from, next) => {
   } else {
     next();
   }
-});
+}); */
 
 export default router
