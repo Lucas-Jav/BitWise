@@ -1,20 +1,22 @@
 <template>
-    <main>
-        <div class="person">
-            <h2>Sua conta</h2>
-            
-            <div class="cards">
-                <router-link class="card" v-for="(card, key) in cards" :to="card.link"  :key="key">
-                <img :src="card.src" alt="icon" loading="lazy">
-                <div class="content">
-                    <h1>{{ card.title }}</h1>
-                    <span>{{ card.description }}</span>
+    <section>
+        <main>
+            <div class="person">
+                <h2>Sua conta</h2>
+                
+                <div class="cards">
+                    <router-link class="card" v-for="(card, key) in cards" :to="card.link"  :key="key">
+                    <img :src="card.src" alt="icon" loading="lazy">
+                    <div class="content">
+                        <h1>{{ card.title }}</h1>
+                        <span>{{ card.description }}</span>
+                    </div>
+                    </router-link>
                 </div>
-                </router-link>
             </div>
-        </div>
-        
-    </main>
+            
+        </main>
+    </section>
 </template>
 
 <script>
@@ -62,11 +64,12 @@
             document.title = 'Sua conta';
             this.getUserApi();
 
+            // array que vai carregar cards com rotas no html
             this.cards = [
                 {
                     title: 'Seus pedidos',
                     description: 'Rastrear, devolver ou comprar produtos novamente',
-                    src: 'https://img.icons8.com/ios/100/null/order-history.png',
+                    src: 'https://img.icons8.com/ios/100/null/shopping-basket.png',
                     link: `/user/${this.user.id}/account/requests`
                 },
                 {
@@ -108,7 +111,7 @@
                 {
                     title: 'Suas listas',
                     description: 'Gerenciar, compartilhar, ou criar listas de desejos',
-                    src: 'https://img.icons8.com/ios/100/null/shortlist.png',
+                    src: 'https://img.icons8.com/ios/100/null/favorite-cart.png',
                     link: `/user/${this.user.id}/account/list`
                 }
             ]
@@ -119,6 +122,24 @@
 
 <style scoped>
 
+    section {
+        width: 100%;
+        min-height: 80vh;
+        padding: 50px 11%;
+    }
+
+    @media (max-width: 1547px) {
+        section {
+            padding: 50px 5%;
+        }
+    }
+
+    @media (max-width: 425px) {
+        section {
+            padding: 50px 0px;
+        }
+    }
+    
     div.person {
         width: 100%;
         height: auto;
