@@ -9,6 +9,7 @@
 
     export default {
         name: 'UserView',
+        props: ['userId', 'dados'],
         created() {
             this.segurityCheck(); // assim que carregar a pagina UserView ele verificara o user
         },
@@ -22,7 +23,7 @@
                         const data = response.data;
 
                         if((data.id == id) && (data.token == token) && (data.logged)) {
-                            this.$router.push('/user/' + localStorage.getItem('userId') + '/home');
+                            
                         } else {
                             axios.patch(`http://localhost:3000/users/${id}`, {
                                 logged: false

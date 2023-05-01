@@ -15,9 +15,10 @@
       const token = localStorage.getItem('token');
 
       if (userId && token) {
-        this.$router.push('/404');
+        this.$router.push('/user/' + localStorage.getItem('userId') + '/home');
       } else {
         localStorage.removeItem('userId')
+        localStorage.removeItem('token')
       }
     }
   }

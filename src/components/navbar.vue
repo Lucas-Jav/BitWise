@@ -8,7 +8,7 @@
         </router-link>
         <nav class="desktop" v-if="($route.params.id || (token && userId))"> <!-- section for desktop logged-->
             <router-link :to="'/user/' + ($route.params.id || userId) + '/home'">Home</router-link>
-            <router-link :to="'/user/' + ($route.params.id || userId) + '/profile'">Profile</router-link>
+            <router-link :to="'/user/' + ($route.params.id || userId) + '/account'">Account</router-link>
             <router-link :to="'/user/' + ($route.params.id || userId) + '/cart'">Cart</router-link>
             <router-link to="" @click="$emit('logout'),toggleModal">Exit</router-link>
         </nav>

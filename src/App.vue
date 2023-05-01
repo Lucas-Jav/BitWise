@@ -47,6 +47,18 @@
         localStorage.removeItem('userId');
         this.$router.push('/login');
       }
+    },
+    created() {
+      const userId = localStorage.getItem('userId');
+      const token = localStorage.getItem('token');
+
+      if (userId && token) {
+        console.log('tudo okay')
+      } else {
+        localStorage.removeItem('userId')
+        localStorage.removeItem('token')
+      }
+    
     }
   }
 

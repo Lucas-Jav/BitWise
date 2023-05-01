@@ -1,9 +1,8 @@
 <template>
     <main>
         <div class="person">
-            <img :src="user.img" :alt="'img-' + user.name">
-            <h2>{{ user.name }}</h2>
-            <span><strong>ID:</strong>{{ user.id }}</span>
+            
+            
         </div>
         
         
@@ -11,15 +10,16 @@
 </template>
 
 <script>
-    import axios from 'axios';
 
     export default {
-        name: 'UserProfileView',
+        name: 'UserAccountView',
+        props: ['dados'],
         data() {
             return {
                 user: {
                     id: '',
                     name: '',
+                    username: '',
                     email: '',
                     password: '',
                     birthday: '',
@@ -32,13 +32,12 @@
             }
         },
         methods: {
-            async getUserApi(id) {
-                await axios.get(`http://localhost:3000/users/${id}`).then((response) => {
-                    const data = response.data;
-                    
+            getUserApi() {
+                const data = this.dados;
                     this.user = {
                         id: data.id,
                         name: data.name,
+                        username: data.username,
                         email: data.email,
                         password: data.password,
                         birthday: data.birthday,
@@ -47,12 +46,12 @@
                         img: data.img,
                     }
 
-                })
+                return this.user;
             }
         },
         created() {
-            const userId = this.$route.params.id
-            this.getUserApi(userId);
+            document.title = 'Your Account';
+            this.getUserApi();
         }
     }
 
@@ -64,14 +63,14 @@
         width: 100%;
         height: auto;
         display: flex;
-        flex-direction: column;
-        justify-content: center;
         align-items: center;
     }
 
     div.person img{
-        width: 100px;
+        width: 120px;
     }
+
+    
 
 
 </style>

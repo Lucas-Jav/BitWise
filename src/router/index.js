@@ -3,7 +3,7 @@ import HomeView from '@/views/HomeView.vue'
 import RegisterView from '@/views/RegisterView.vue'
 import LoginView from '@/views/LoginView.vue'
 import UserView from '@/views/User/UserView.vue'
-import UserProfileView from '@/views/User/UserProfileView.vue'
+import UserAccountView from '@/views/User/UserAccountView.vue'
 import UserHomeView from '@/views/User/UserHomeView.vue'
 import UserCartView from '@/views/User/UserCartView.vue'
 import UserNotFoundView from '@/views/User/UserNotFoundView.vue'
@@ -47,6 +47,9 @@ const routes = [
     name: 'user',
     component: UserView,
     meta: { requiresAuth: true },
+    props: (route) => (
+      { userId: route.params.id }, { dados: route.params.dados }
+    ),
     children: [
       {
         path: 'home',
@@ -54,9 +57,19 @@ const routes = [
         component: UserHomeView
       },
       {
-        path: 'profile',
-        name: 'profileUser',
-        component: UserProfileView
+        path: 'account',
+        name: 'accountUser',
+        component: UserAccountView,
+        props: (route) => (  // data
+          { userId: route.params.id }, { dados: route.params.dados }
+        ),
+        beforeEnter: (to, from, next) => {
+          const authenticatedUserId = localStorage.getItem('userId');
+            axios.get(`http://localhost:3000/users/${authenticatedUserId}`).then(res => {
+              to.params.dados = res.data;
+              next();
+            })
+        }
       },
       {
         path: 'cart',
@@ -69,7 +82,14 @@ const routes = [
       const authenticatedUserId = localStorage.getItem('userId');
 
       if (userId === authenticatedUserId) {
-        next();
+        axios.get(`http://localhost:3000/users/${authenticatedUserId}`).then(res => { //data
+          to.params.dados = res.data;
+          next();
+        }).catch(err => {
+          console.error(err);
+          next('/');
+        })
+        
       } else {
         next('/login');
       }
