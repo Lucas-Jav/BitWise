@@ -64,7 +64,9 @@
     section {
     left: 0;
     bottom: 0px;
-    border-top: 2px solid #000;
+    -webkit-box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.65);
+    -moz-box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.65);
+    box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.65);
     padding-top: 60px;
     }
 
@@ -82,7 +84,7 @@
     }
 
     footer.top {
-        border-bottom: 2px solid #000;
+        border-bottom: 1px solid #565959;
         padding-bottom: 20px;
     }
 

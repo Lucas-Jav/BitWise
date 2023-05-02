@@ -54,11 +54,19 @@ export default {
     header {
         width: 100%;
         height: 70px;
-        border-bottom: 2px solid #000;
         display: flex;
         justify-content: space-between;
         align-items: center;
         padding: 10px 10%;
+        -webkit-box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.65);
+        -moz-box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.65);
+        box-shadow: 0px 0px 14px 0px rgba(0,0,0,0.65);
+    }
+
+    @media (max-width: 1552px) {
+        header {
+            padding: 10px 20px;
+        }
     }
 
     header a  {
@@ -74,13 +82,22 @@ export default {
     header nav.desktop a {
         cursor: pointer;
         font-size: 1rem;
-        border-bottom: 1px solid transparent;
-
+        background-image: linear-gradient(
+            transparent 0%,
+            transparent 90%,
+            #111 95%,
+            #111 100%
+        );
+        background-repeat: no-repeat;
+        background-size: 0% 100%;
+        background-position-x: right;
+        transition:  background-size 300ms;
     }
 
     header nav.desktop a:hover {
         transition: 1s;
-        border-bottom: 1px solid #000;
+        background-size: 100% 100%;
+        background-position-x: left;
     }
 
     img {

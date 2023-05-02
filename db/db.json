@@ -151,6 +151,22 @@
       "cart": [],
       "bought": [],
       "id": 10
+    },
+    {
+      "name": "lucas oli",
+      "username": "lucas_66",
+      "logged": false,
+      "email": "lucas@email.com",
+      "password": "919110",
+      "birthday": "24/03/2004",
+      "account_created": "01/05/2023",
+      "cpf": "699.831.203-21",
+      "cep": "24388-590",
+      "token": "BFZXE40496",
+      "img": "https://avatars.dicebear.com/api/bottts/3286.svg",
+      "cart": [],
+      "bought": [],
+      "id": 11
     }
   ],
   "seller": [

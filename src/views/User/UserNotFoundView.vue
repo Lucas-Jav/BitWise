@@ -23,6 +23,9 @@
                     this.$router.go(-1);
                 }
             }
+        },
+        created() {
+            document.title = '404 │ Page not found';
         }
     }
 

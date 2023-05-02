@@ -11,6 +11,7 @@
   export default {
     name: 'HomeView',
     created() {
+      document.title = 'BitWise';
       const userId = localStorage.getItem('userId');
       const token = localStorage.getItem('token');
 
