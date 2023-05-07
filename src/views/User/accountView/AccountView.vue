@@ -1,22 +1,20 @@
 <template>
-    <section>
-        <main>
-            <div class="person">
-                <h2>Sua conta</h2>
-                
-                <div class="cards">
-                    <router-link class="card" v-for="(card, key) in cards" :to="card.link"  :key="key">
-                    <img :src="card.src" alt="icon" loading="lazy">
-                    <div class="content">
-                        <h1>{{ card.title }}</h1>
-                        <span>{{ card.description }}</span>
-                    </div>
-                    </router-link>
-                </div>
-            </div>
+    <main>
+        <div class="person">
+            <h2>Sua conta</h2>
             
-        </main>
-    </section>
+            <div class="cards">
+                <router-link class="card" v-for="(card, key) in cards" :to="card.link"  :key="key">
+                <img :src="card.src" alt="icon" loading="lazy">
+                <div class="content">
+                    <h1>{{ card.title }}</h1>
+                    <span>{{ card.description }}</span>
+                </div>
+                </router-link>
+            </div>
+        </div>
+        
+    </main>
 </template>
 
 <script>
@@ -121,24 +119,6 @@
 </script>
 
 <style scoped>
-
-    section {
-        width: 100%;
-        min-height: 80vh;
-        padding: 50px 11%;
-    }
-
-    @media (max-width: 1547px) {
-        section {
-            padding: 50px 5%;
-        }
-    }
-
-    @media (max-width: 425px) {
-        section {
-            padding: 50px 0px;
-        }
-    }
     
     div.person {
         width: 100%;
