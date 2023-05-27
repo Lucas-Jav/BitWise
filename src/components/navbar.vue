@@ -1,16 +1,16 @@
 <template>
     <header>
         <router-link :to="'/user/' + ($route.params.id || userId) + '/home'" v-if="($route.params.id || (token && userId))"> <!-- logo/ancora user logado -->
-            <img :src="logo" :alt="alt" id="logo">
+            <img :src="logo" :alt="alt" id="logo" loading="lazy">
         </router-link>
         <router-link to="/" v-else> <!-- logo/ancora user deslogado -->
-            <img :src="logo" :alt="alt" id="logo">
+            <img :src="logo" :alt="alt" id="logo" loading="lazy">
         </router-link>
         <nav class="desktop" v-if="($route.params.id || (token && userId))"> <!-- section for desktop logged-->
             <router-link :to="'/user/' + ($route.params.id || userId) + '/home'">Home</router-link>
             <router-link :to="'/user/' + ($route.params.id || userId) + '/account/select'">Account</router-link>
             <router-link :to="'/user/' + ($route.params.id || userId) + '/cart'">Cart</router-link>
-            <router-link to="" @click="$emit('logout'),toggleModal">Exit</router-link>
+            <router-link to="" @click="$emit('logout'),toggleModal()">Exit</router-link>
         </nav>
         <nav class="desktop" v-else> <!-- section for desktop offline -->
             <router-link to="/">Home</router-link>

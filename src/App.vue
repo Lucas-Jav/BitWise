@@ -1,4 +1,4 @@
-<template>
+<template>  
   <Navbar :logo="logo" alt="logo"  @openModal="togleModal" 
   @logout="logout" :userId="IdUsuario" :token="tokenUser"/>
   <ModalMenuVue v-if="modal" :logo="logo" @closeModal="togleModal"  
@@ -34,7 +34,7 @@
         this.modal = !this.modal;
       },
       async logout() {
-        this.IdUsuario = false
+        this.IdUsuario = false;
 
         const id = localStorage.getItem('userId');
         const token = localStorage.getItem('token');

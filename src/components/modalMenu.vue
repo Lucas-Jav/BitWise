@@ -61,7 +61,15 @@
         justify-content: space-between;
         align-items: center;
         padding: 10px 10%;
-        border-bottom: 2px solid #000;
+        -webkit-box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.65);
+        -moz-box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.65);
+        box-shadow: 0px 0px 14px 0px rgba(0,0,0,0.65);
+    }
+    
+    @media (max-width: 1552px) {
+        header.modalheader {
+            padding: 10px 20px;
+        }
     }
 
     header.modalheader img {
@@ -69,20 +77,23 @@
     }
 
     header.modalheader button {
-        font-size: 25px;
+        font-size: 20px;
     }
 
     footer.modalfooter {
         width: 100%;
         height: auto;
-        border-top: 2px solid #000;
         position: fixed;
         bottom: 0;
         padding: 20px 10%;
         display: flex;
         flex-direction: column;
         gap: 10px;
+        -webkit-box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.65);
+        -moz-box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.65);
+        box-shadow: 0px 0px 14px 0px rgba(0,0,0,0.65);
     }
+
 
     footer.modalfooter a {
         text-align: center;

@@ -167,6 +167,22 @@
       "cart": [],
       "bought": [],
       "id": 11
+    },
+    {
+      "name": "lucas oliveira",
+      "username": "lucas_555",
+      "logged": false,
+      "email": "lucasra@gmail.com",
+      "password": "91911025",
+      "birthday": "24/03/2004",
+      "account_created": "09/05/2023",
+      "cpf": "302.167.976-59",
+      "cep": "34895-737",
+      "token": "JAIEY72039",
+      "img": "https://avatars.dicebear.com/api/bottts/4324.svg",
+      "cart": [],
+      "bought": [],
+      "id": 12
     }
   ],
   "seller": [
